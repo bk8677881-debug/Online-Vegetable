@@ -1,0 +1,828 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050b18">
+<meta name="description" content="Shop premium fresh vegetables at Uttam Fresh Veg.">
+<title>Vegetable Market | Uttam Fresh Veg</title>
+<link rel="icon" href="Uttam.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+:root {
+  --bg:#050b18;
+  --bg2:#0a1427;
+  --gold:#19c8e8;
+  --gold-light:#d8f8ff;
+  --cream:#f2f6ff;
+  --muted:#a5b4cb;
+  --line:rgba(25,200,232,.2);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:var(--sans);background:var(--bg);color:var(--cream);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+.container{width:min(1240px,91%);margin:auto}
+.gold{color:var(--gold)}
+
+.announcement{
+  background:var(--gold);color:#061323;text-align:center;
+  padding:10px 15px;font-size:10px;letter-spacing:1.7px;font-weight:800
+}
+.announcement i{margin-right:8px}
+
+.navbar{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(5,11,24,.97);border-bottom:1px solid var(--line);
+  backdrop-filter:blur(22px);box-shadow:0 8px 35px #0002
+}
+.nav-inner{min-height:88px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:inline-flex;align-items:center;gap:12px;min-width:185px}
+.brand img{
+  width:48px;height:48px;object-fit:cover;border-radius:50%;
+  border:1px solid var(--gold);box-shadow:0 0 18px #19c8e833
+}
+.brand-text strong{display:block;color:var(--cream);font:600 21px var(--serif);letter-spacing:1px}
+.brand-text small{display:block;color:var(--gold);font-size:8px;letter-spacing:2.5px;margin-top:4px}
+.nav-links{display:flex;align-items:center;gap:clamp(12px,1.7vw,24px)}
+.nav-links a{position:relative;color:#d4ddd4;font-size:11px;font-weight:600;padding:12px 0;white-space:nowrap;transition:color .3s}
+.nav-links a:after{content:"";position:absolute;bottom:3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold-light)}
+.nav-links a:hover:after,.nav-links a.active:after{width:100%}
+.nav-actions{display:flex;align-items:center;gap:12px}
+.nav-icon{
+  width:40px;height:40px;display:grid;place-items:center;position:relative;
+  border:1px solid var(--line);border-radius:50%;color:var(--gold-light);
+  background:#ffffff06;transition:.3s
+}
+.nav-icon:hover{background:var(--gold);color:var(--bg);transform:translateY(-3px)}
+.cart-count{
+  position:absolute;top:-5px;right:-5px;min-width:19px;height:19px;padding:0 4px;
+  display:grid;place-items:center;border-radius:50%;background:var(--gold);
+  color:var(--bg);font-size:10px;font-weight:800;border:2px solid var(--bg)
+}
+.account-status{font-size:10px;color:var(--muted);max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.menu-toggle{
+  display:none;width:40px;height:40px;border:1px solid var(--line);
+  background:transparent;color:var(--gold);font-size:19px;border-radius:50%
+}
+
+.market-hero{
+  position:relative;overflow:hidden;padding:75px 0 68px;
+  background:radial-gradient(ellipse at 82% 20%,#0c477044,transparent 42%),linear-gradient(120deg,#081326,#050b18 65%);
+  border-bottom:1px solid var(--line)
+}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:48px}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--gold);font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase}
+.eyebrow:before{content:"";width:30px;height:1px;background:var(--gold)}
+h1{font:500 clamp(38px,5vw,65px)/1.1 var(--serif);letter-spacing:-1px;margin:20px 0}
+.hero-copy{max-width:540px;color:var(--muted);font-size:14px;line-height:1.9}
+.hero-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}
+.tag{border:1px solid var(--line);background:#ffffff06;color:#d7e6f4;padding:9px 12px;font-size:10px;letter-spacing:.5px}
+.tag i{color:var(--gold);margin-right:6px}
+.hero-image{
+  min-height:320px;border:1px solid var(--line);position:relative;
+  background:linear-gradient(0deg,#050b1844,#050b1800),url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1200&q=85') center/cover;
+  box-shadow:0 30px 80px #0005
+}
+.hero-image:after{
+  content:'FRESH • LOCAL • PREMIUM';position:absolute;right:0;bottom:0;
+  background:var(--gold);color:#061323;font-size:10px;letter-spacing:2px;font-weight:800;padding:14px 18px
+}
+
+.market{padding:56px 0 80px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px}
+.section-head h2{font:500 clamp(30px,4vw,43px)/1.2 var(--serif);margin-top:12px}
+.section-head p{color:var(--muted);font-size:12px;line-height:1.8;max-width:360px}
+.tools{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:26px;flex-wrap:wrap}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{
+  border:1px solid var(--line);background:#ffffff05;color:var(--muted);
+  padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:.5px;transition:.2s
+}
+.filter-btn:hover,.filter-btn.active{background:var(--gold);border-color:var(--gold);color:#061323}
+.search-wrap{position:relative;min-width:min(100%,260px)}
+.search-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:12px}
+.search-wrap input{
+  width:100%;background:#ffffff06;border:1px solid var(--line);
+  color:var(--cream);padding:12px 14px 12px 38px;outline:none;font-size:12px
+}
+.search-wrap input:focus{border-color:var(--gold)}
+.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.product-card{
+  background:linear-gradient(145deg,#ffffff0b,#ffffff03);
+  border:1px solid var(--line);overflow:hidden;
+  transition:transform .25s,border-color .25s,box-shadow .25s
+}
+.product-card:hover{transform:translateY(-5px);border-color:#19c8e87a;box-shadow:0 18px 45px #0003}
+.product-image{height:190px;position:relative;background:#0b1729;overflow:hidden}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.product-card:hover .product-image img{transform:scale(1.06)}
+.product-badge{
+  position:absolute;top:12px;left:12px;background:#050b18dd;border:1px solid var(--line);
+  color:var(--gold-light);font-size:9px;font-weight:800;letter-spacing:1px;padding:7px 9px
+}
+.product-info{padding:17px}
+.product-category{color:var(--gold);font-size:9px;letter-spacing:1.8px;text-transform:uppercase;font-weight:800}
+.product-info h3{font:600 21px var(--serif);margin:8px 0 7px}
+.product-info .nepali-name{font:500 16px var(--sans);color:var(--gold-light);margin-top:0}
+.product-desc{color:var(--muted);font-size:11px;line-height:1.7;min-height:38px}
+.product-bottom{display:flex;align-items:flex-start;flex-direction:column;gap:10px;margin-top:17px;padding-top:14px;border-top:1px solid #ffffff10}
+.price{font-weight:800;font-size:17px;color:var(--cream);display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+.price small{font-size:9px;font-weight:500;color:var(--muted)}
+.quantity-control{display:flex;align-items:center;gap:9px;margin-top:5px;width:100%}
+.qty-btn{width:30px;height:30px;flex-shrink:0;border:1px solid var(--line);background:#ffffff08;color:var(--gold-light);font-weight:800;font-size:17px}
+.qty-btn:hover{background:var(--gold);color:#061323}
+.qty-number{min-width:20px;text-align:center;font-weight:800;font-size:13px}
+.add-btn{
+  flex:1;border:1px solid var(--gold);background:var(--gold);color:#061323;
+  min-width:40px;min-height:40px;padding:8px 10px;display:flex;align-items:center;justify-content:center;
+  gap:8px;font-size:11px;font-weight:800;transition:.2s
+}
+.add-btn:hover{background:transparent;color:var(--gold-light)}
+.add-btn i{font-size:12px}
+.empty-state{grid-column:1/-1;text-align:center;padding:55px 20px;border:1px dashed var(--line);color:var(--muted)}
+.empty-state i{font-size:28px;color:var(--gold);margin-bottom:12px}
+
+.promise{padding:26px 0;border-top:1px solid var(--line);background:#ffffff03}
+.promise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.promise-item{display:flex;align-items:center;gap:14px}
+.promise-item i{font-size:20px;color:var(--gold)}
+.promise-item strong{display:block;font-size:11px;letter-spacing:.6px}
+.promise-item span{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+
+.footer{padding:25px 0;border-top:1px solid var(--line);background:linear-gradient(180deg,#081326,#030711);color:var(--muted);font-size:10px}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:32px;padding-bottom:30px}
+.footer-brand{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.footer-brand img{width:54px;height:54px;object-fit:cover;border-radius:50%;border:1px solid var(--gold)}
+.footer h3{font:500 20px var(--serif);margin-bottom:14px;color:var(--cream)}
+.footer p,.footer a{color:var(--muted);font-size:11px;line-height:1.9}
+.footer-links{display:grid;gap:5px}
+.footer a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:var(--muted);font-size:10px}
+.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+
+.toast{
+  position:fixed;right:22px;bottom:22px;z-index:2000;background:#102d20;
+  border:1px solid #19c8e899;color:#effff5;padding:14px 18px;
+  box-shadow:0 15px 40px #0005;display:flex;align-items:center;gap:10px;font-size:12px;
+  transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast i{color:var(--gold)}
+
+@media(max-width:1050px){
+  .nav-inner{gap:14px}
+  .brand{min-width:unset}
+  .brand-text strong{font-size:18px}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:10px}
+  .product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .product-image{height:175px}
+}
+@media(max-width:800px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-grid>div:first-child{grid-column:1/-1}
+  .account-status{max-width:90px;font-size:9px}
+  .nav-inner{min-height:76px}
+  .menu-toggle{display:grid;place-items:center;order:3}
+  .nav-actions{margin-left:auto}
+  .nav-links{
+    display:none;position:absolute;top:100%;left:0;right:0;padding:16px 5%;
+    background:#050b18;border-bottom:1px solid var(--line);
+    flex-direction:column;align-items:stretch;gap:2px
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 0;font-size:12px}
+  .nav-links a:after{display:none}
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .market-hero{padding:54px 0}
+  .hero-image{min-height:260px}
+  .section-head{align-items:start;flex-direction:column;gap:10px}
+  .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+  .product-image{height:160px}
+  .product-info{padding:13px}
+  .product-info h3{font-size:18px}
+  .promise-grid{grid-template-columns:1fr;gap:18px}
+}
+@media(max-width:440px){
+  .brand img{width:39px;height:39px}
+  .brand-text strong{font-size:16px}
+  .brand-text small{font-size:7px;letter-spacing:1.6px}
+  .nav-actions{gap:7px}
+  .nav-icon{width:36px;height:36px}
+  .market{padding:40px 0 55px}
+  .product-grid{gap:10px}
+  .product-image{height:125px}
+  .product-info h3{font-size:16px}
+  .product-info .nepali-name{font-size:14px}
+  .product-desc{font-size:10px}
+  .price{font-size:15px}
+  .add-btn{min-width:35px;min-height:35px;padding:7px}
+  .add-btn .btn-label{display:none}
+  .tools{align-items:stretch}
+  .search-wrap{width:100%}
+}
+</style>
+</head>
+
+<body>
+<div class="announcement">
+  <i class="fa-solid fa-leaf"></i>
+  FRESH PICKS, PREMIUM QUALITY &nbsp; • &nbsp; A BETTER WAY TO SHOP
+</div>
+
+<header class="navbar">
+  <div class="container nav-inner">
+    <a href="home.html" class="brand" aria-label="Uttam Fresh Veg homepage">
+      <img src="Uttam.png" alt="Uttam Fresh Veg logo">
+      <span class="brand-text">
+        <strong>Uttam Fresh Veg</strong>
+        <small>THE FRESH MARKET</small>
+      </span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="home.html">Home</a>
+      <a href="vegetable.html" class="active">Vegetables</a>
+      <a href="Gallery.html">Gallery</a>
+      <a href="review.html">Reviews</a>
+      <a href="cart.html">Cart</a>
+      <a href="TermsandCondition.html">Terms &amp; Conditions</a>
+      <a href="contact.html">Contact</a>
+      <a href="About.html">About</a>
+    </nav>
+
+    <div class="nav-actions">
+      <span class="account-status" id="accountStatus">Guest account</span>
+      <a href="account.html" class="nav-icon" aria-label="Sign in or create account" title="Sign In / Create Account">
+        <i class="fa-regular fa-user"></i>
+      </a>
+      <a href="cart.html" class="nav-icon" aria-label="Shopping cart" title="Shopping Cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-count" id="cartCount" aria-live="polite">0</span>
+      </a>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+</header>
+
+<main>
+<section class="market-hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">THE PREMIUM VEGETABLE MARKET</span>
+      <h1>Fresh from the earth.<br><span class="gold">Made for your table.</span></h1>
+      <p class="hero-copy">
+        Discover carefully selected everyday essentials and seasonal favourites.
+        Choose your vegetables, add them to your basket, and your shopping cart updates instantly.
+      </p>
+      <div class="hero-tags">
+        <span class="tag"><i class="fa-solid fa-seedling"></i> FRESH SELECTION</span>
+        <span class="tag"><i class="fa-solid fa-basket-shopping"></i> EASY SHOPPING</span>
+        <span class="tag"><i class="fa-solid fa-heart"></i> QUALITY FIRST</span>
+      </div>
+    </div>
+    <div class="hero-image" role="img" aria-label="Fresh assortment of vegetables"></div>
+  </div>
+</section>
+
+<section class="market">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">SHOP THE HARVEST</span>
+        <h2>Our <span class="gold">Vegetables</span></h2>
+      </div>
+      <p>Choose a fresh favourite and press Add to Cart. Prices are shown in Nepalese rupees.</p>
+    </div>
+
+    <div class="tools">
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-category="All">All vegetables</button>
+        <button class="filter-btn" data-category="Leafy greens">Leafy greens</button>
+        <button class="filter-btn" data-category="Everyday essentials">Essentials</button>
+        <button class="filter-btn" data-category="Seasonal picks">Seasonal picks</button>
+      </div>
+      <label class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search" id="searchInput" placeholder="Search vegetables..." aria-label="Search vegetables">
+      </label>
+    </div>
+
+    <div class="product-grid" id="productGrid" aria-live="polite"></div>
+    <p style="margin-top:18px;color:var(--muted);font-size:11px">
+      Prices are sample market prices in NPR except for the five vegetables priced according to your list. Update sample prices to match your local shop.
+    </p>
+  </div>
+</section>
+
+<section class="promise">
+  <div class="container promise-grid">
+    <div class="promise-item">
+      <i class="fa-solid fa-leaf"></i>
+      <div><strong>FRESH SELECTION</strong><span>Carefully chosen market favourites</span></div>
+    </div>
+    <div class="promise-item">
+      <i class="fa-solid fa-basket-shopping"></i>
+      <div><strong>SHOP WITH EASE</strong><span>Your cart count updates as you add items</span></div>
+    </div>
+    <div class="promise-item">
+      <i class="fa-solid fa-hand-holding-heart"></i>
+      <div><strong>QUALITY FIRST</strong><span>Thoughtful choices for everyday meals</span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="Uttam.png" alt="Uttam Fresh Veg logo">
+          <div>
+            <h3>Uttam Fresh Veg</h3>
+            <span style="color:var(--gold);font-size:9px;letter-spacing:2px">FRESHNESS • QUALITY • HEALTH</span>
+          </div>
+        </div>
+        <p>Fresh vegetables for your everyday table. Carefully selected, easy to shop, and made for your family.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <div class="footer-links">
+          <a href="home.html">Home</a>
+          <a href="vegetable.html">Vegetables</a>
+          <a href="cart.html">Shopping Cart</a>
+          <a href="account.html">My Account</a>
+        </div>
+      </div>
+      <div>
+        <h3>Customer Care</h3>
+        <div class="footer-links">
+          <a href="contact.html">Contact Us</a>
+          <a href="About.html">About Us</a>
+          <a href="review.html">Customer Reviews</a>
+          <a href="TermsandCondition.html">Terms &amp; Conditions</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Uttam Fresh Veg. All rights reserved.</span>
+      <span>Freshness &nbsp; • &nbsp; Quality &nbsp; • &nbsp; Health</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toastMessage">Added to your cart</span>
+</div>
+
+<script>
+const CART_KEY = 'uttamFreshVegCart';
+let activeCategory = 'All';
+let toastTimer;
+const selectedQty = {};
+
+/* Five vegetables and prices supplied by you.
+   The remaining ten are additional sample vegetables. */
+const products = [
+  {
+    id:'lady-finger',
+    name:'Lady Finger',
+    nameNe:'भिण्डी',
+    category:'Seasonal picks',
+    price:100,
+    unit:'per kg',
+    badge:'YOUR PRICE',
+    image:'LadyFinger.jpg',
+    description:'Fresh green lady finger for curries and everyday meals.',
+    descriptionNe:'ताजा भिण्डी, तरकारीका लागि।'
+  },
+  {
+    id:'bitter-gourd',
+    name:'Bitter Gourd',
+    nameNe:'तिते करेला',
+    category:'Seasonal picks',
+    price:170,
+    unit:'per kg',
+    badge:'YOUR PRICE',
+    image:'BitterGourd.webp',
+    description:'Fresh bitter gourd for traditional home cooking.',
+    descriptionNe:'ताजा तिते करेला, घरको खानाका लागि।'
+  },
+  {
+    id:'bottle-gourd',
+    name:'Bottle Gourd',
+    nameNe:'लौका',
+    category:'Seasonal picks',
+    price:80,
+    unit:'per kg',
+    badge:'YOUR PRICE',
+    image:'BottleGourd.jpg',
+    description:'Tender bottle gourd for fresh vegetable dishes.',
+    descriptionNe:'ताजा लौका, तरकारीका लागि।'
+  },
+  {
+    id:'cucumber',
+    name:'Cucumber',
+    nameNe:'काँक्रो',
+    category:'Seasonal picks',
+    price:100,
+    unit:'per kg',
+    badge:'YOUR PRICE',
+    image:'Cucumber.webp',
+    description:'Cool and refreshing cucumber for salads and snacks.',
+    descriptionNe:'सलाद र खाजाका लागि ताजा काँक्रो।'
+  },
+  {
+    id:'chili',
+    name:'Chili',
+    nameNe:'खुर्सानी',
+    category:'Seasonal picks',
+    price:200,
+    unit:'per kg',
+    badge:'YOUR PRICE',
+    image:'Chili.jpg',
+    description:'Fresh chilies to add flavour and heat to meals.',
+    descriptionNe:'खानामा पिरो स्वाद थप्ने ताजा खुर्सानी।'
+  },
+  {
+    id:'tomato',
+    name:'Tomatoes',
+    nameNe:'गोलभेँडा',
+    category:'Everyday essentials',
+    price:90,
+    unit:'per kg',
+    badge:'MARKET FAVOURITE',
+    image:'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=700&q=85',
+    description:'Juicy tomatoes for curries, achar and salads.',
+    descriptionNe:'गोलभेँडा तरकारी, अचार र सलादका लागि।'
+  },
+  {
+    id:'potato',
+    name:'Potatoes',
+    nameNe:'आलु',
+    category:'Everyday essentials',
+    price:65,
+    unit:'per kg',
+    badge:'DAILY ESSENTIAL',
+    image:'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=700&q=85',
+    description:'Versatile potatoes for everyday meals.',
+    descriptionNe:'दैनिक खानाका लागि उपयोगी आलु।'
+  },
+  {
+    id:'onion',
+    name:'Red Onions',
+    nameNe:'प्याज',
+    category:'Everyday essentials',
+    price:80,
+    unit:'per kg',
+    badge:'KITCHEN STAPLE',
+    image:'https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=700&q=85',
+    description:'A kitchen staple with rich flavour.',
+    descriptionNe:'स्वादिलो परिकारका लागि प्याज।'
+  },
+  {
+    id:'carrot',
+    name:'Carrots',
+    nameNe:'गाजर',
+    category:'Everyday essentials',
+    price:100,
+    unit:'per kg',
+    badge:'CRISP & SWEET',
+    image:'https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&w=700&q=85',
+    description:'Crunchy carrots for snacks and cooking.',
+    descriptionNe:'खाजा र तरकारीका लागि कुरकुरा गाजर।'
+  },
+  {
+    id:'cabbage',
+    name:'Cabbage',
+    nameNe:'बन्दा',
+    category:'Everyday essentials',
+    price:70,
+    unit:'per kg',
+    badge:'FRESH PICK',
+    image:'https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=700&q=85',
+    description:'Fresh cabbage for stir-fries and salads.',
+    descriptionNe:'तरकारी र सलादका लागि ताजा बन्दा।'
+  },
+  {
+    id:'cauliflower',
+    name:'Cauliflower',
+    nameNe:'काउली',
+    category:'Seasonal picks',
+    price:95,
+    unit:'per piece',
+    badge:'SEASONAL',
+    image:'https://images.unsplash.com/photo-1568584711271-6c929fb49c75?auto=format&fit=crop&w=700&q=85',
+    description:'A versatile favourite for family recipes.',
+    descriptionNe:'परिवारको खानाका लागि ताजा काउली।'
+  },
+  {
+    id:'spinach',
+    name:'Spinach',
+    nameNe:'पालुङ्गो',
+    category:'Leafy greens',
+    price:60,
+    unit:'per bunch',
+    badge:'LEAFY FRESH',
+    image:'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=700&q=85',
+    description:'Tender leafy greens for curries and sides.',
+    descriptionNe:'साग र तरकारीका लागि पालुङ्गो।'
+  },
+  {
+    id:'broccoli',
+    name:'Broccoli',
+    nameNe:'ब्रोकाउली',
+    category:'Leafy greens',
+    price:180,
+    unit:'per kg',
+    badge:'GREEN PICK',
+    image:'https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?auto=format&fit=crop&w=700&q=85',
+    description:'Fresh green florets for everyday meals.',
+    descriptionNe:'खानाका लागि ताजा हरियो ब्रोकाउली।'
+  },
+  {
+    id:'capsicum',
+    name:'Green Capsicum',
+    nameNe:'भेडे खुर्सानी',
+    category:'Seasonal picks',
+    price:140,
+    unit:'per kg',
+    badge:'FRESH PICK',
+    image:'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=700&q=85',
+    description:'Crisp capsicum for salads and stir-fries.',
+    descriptionNe:'सलाद र तरकारीका लागि भेडे खुर्सानी।'
+  },
+  {
+    id:'pumpkin',
+    name:'Pumpkin',
+    nameNe:'फर्सी',
+    category:'Seasonal picks',
+    price:80,
+    unit:'per kg',
+    badge:'FARM FAVOURITE',
+    image:'https://images.unsplash.com/photo-1506917728037-b6af01a7d403?auto=format&fit=crop&w=700&q=85',
+    description:'Pumpkin for comforting home-cooked meals.',
+    descriptionNe:'घरको खानाका लागि ताजा फर्सी।'
+  }
+];
+
+products.forEach(p => selectedQty[p.id] = 1);
+
+function readCart() {
+  try {
+    const value = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+    return Array.isArray(value) ? value : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveCart(items) {
+  localStorage.setItem(CART_KEY, JSON.stringify(items));
+  updateCartCount();
+  window.dispatchEvent(new CustomEvent('uttam-cart-updated', {detail:items}));
+}
+
+function updateCartCount() {
+  const count = readCart().reduce(
+    (sum, item) => sum + Math.max(0, Number(item.quantity) || 0), 0
+  );
+  const element = document.getElementById('cartCount');
+  if (element) element.textContent = count;
+}
+
+function setQty(id, delta) {
+  selectedQty[id] = Math.max(1, Math.min(99, (selectedQty[id] || 1) + delta));
+  const element = document.querySelector(`[data-qty-value="${id}"]`);
+  if (element) element.textContent = selectedQty[id];
+}
+
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  if (!product) return;
+
+  const amount = selectedQty[id] || 1;
+  const cart = readCart();
+  const existing = cart.find(item => item.id === id || item.productId === id);
+
+  if (existing) {
+    existing.quantity = (Number(existing.quantity) || 0) + amount;
+    existing.name = product.name;
+    existing.nameNe = product.nameNe;
+    existing.price = product.price;
+    existing.unit = product.unit;
+    existing.image = product.image;
+  } else {
+    cart.push({
+      id:product.id,
+      productId:product.id,
+      name:product.name,
+      nameNe:product.nameNe,
+      price:product.price,
+      unit:product.unit,
+      image:product.image,
+      quantity:amount
+    });
+  }
+
+  saveCart(cart);
+  showToast(`${product.name} / ${product.nameNe} — ${amount} added to cart`);
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMessage').textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+function renderProducts() {
+  const query = document.getElementById('searchInput').value.trim().toLowerCase();
+
+  const filtered = products.filter(product =>
+    (activeCategory === 'All' || product.category === activeCategory) &&
+    [
+      product.name,
+      product.nameNe,
+      product.category,
+      product.description,
+      product.descriptionNe
+    ].join(' ').toLowerCase().includes(query)
+  );
+
+  const grid = document.getElementById('productGrid');
+
+  if (!filtered.length) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <i class="fa-solid fa-leaf"></i>
+        <p>No vegetables found. Try another search.</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(product => `
+    <article class="product-card">
+      <div class="product-image">
+        <img
+          src="${product.image}"
+          alt="${product.name} / ${product.nameNe}"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=700&q=80'">
+        <span class="product-badge">${product.badge}</span>
+      </div>
+
+      <div class="product-info">
+        <span class="product-category">${product.category}</span>
+        <h3>${product.name}</h3>
+        <h3 class="nepali-name">${product.nameNe}</h3>
+        <p class="product-desc">
+          ${product.description}<br>
+          <span style="color:#d1deee">${product.descriptionNe}</span>
+        </p>
+
+        <div class="product-bottom">
+          <div class="price">
+            Rs. ${product.price}
+            <small>
+              ${product.unit === 'per kg' ? 'प्रति केजी' :
+                product.unit === 'per bunch' ? 'प्रति मुठा' : 'प्रति वटा'}
+              · ${product.unit}
+            </small>
+          </div>
+
+          <div class="quantity-control" aria-label="Choose quantity for ${product.name}">
+            <button class="qty-btn" type="button" data-minus="${product.id}" aria-label="Decrease quantity">−</button>
+            <span class="qty-number" data-qty-value="${product.id}" aria-live="polite">${selectedQty[product.id] || 1}</span>
+            <button class="qty-btn" type="button" data-plus="${product.id}" aria-label="Increase quantity">+</button>
+            <button class="add-btn" type="button" data-add="${product.id}">
+              <i class="fa-solid fa-cart-plus"></i>
+              <span class="btn-label"> Add to Cart / कार्टमा राख्नुहोस्</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+  `).join('');
+
+  grid.querySelectorAll('[data-add]').forEach(button => {
+    button.addEventListener('click', () => addToCart(button.dataset.add));
+  });
+
+  grid.querySelectorAll('[data-plus]').forEach(button => {
+    button.addEventListener('click', () => setQty(button.dataset.plus, 1));
+  });
+
+  grid.querySelectorAll('[data-minus]').forEach(button => {
+    button.addEventListener('click', () => setQty(button.dataset.minus, -1));
+  });
+}
+
+function showAccount(user) {
+  const element = document.getElementById('accountStatus');
+  if (!element) return;
+
+  element.textContent = user
+    ? (user.displayName || user.email || 'Signed in')
+    : 'Guest account';
+
+  element.title = user
+    ? `Signed in as ${user.email || user.displayName || 'customer'}`
+    : 'Sign in / Create Account';
+}
+
+async function initFirebaseAccount() {
+  try {
+    const firebaseConfig = {
+      apiKey:'AIzaSyBJTHRR75r4Gep71hbRQ4Ec939Lduz3MCA',
+      authDomain:'uttam-fresh-veg.firebaseapp.com',
+      projectId:'uttam-fresh-veg',
+      storageBucket:'uttam-fresh-veg.firebasestorage.app',
+      messagingSenderId:'505384471955',
+      appId:'1:505384471955:web:d93ef59b2861a8d764ac66'
+    };
+
+    const [{initializeApp},{getAuth,onAuthStateChanged}] = await Promise.all([
+      import('https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js'),
+      import('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js')
+    ]);
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, user => showAccount(user));
+  } catch (error) {
+    showAccount(null);
+    console.warn('Firebase account status unavailable:', error);
+  }
+}
+
+document.getElementById('filters').addEventListener('click', event => {
+  const button = event.target.closest('[data-category]');
+  if (!button) return;
+
+  activeCategory = button.dataset.category;
+
+  document.querySelectorAll('.filter-btn').forEach(item => {
+    item.classList.toggle('active', item === button);
+  });
+
+  renderProducts();
+});
+
+document.getElementById('searchInput').addEventListener('input', renderProducts);
+
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  menuToggle.setAttribute('aria-expanded', String(open));
+  menuToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  menuToggle.innerHTML = open
+    ? '<i class="fa-solid fa-xmark"></i>'
+    : '<i class="fa-solid fa-bars"></i>';
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Open navigation');
+    menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+  });
+});
+
+window.addEventListener('storage', event => {
+  if (event.key === CART_KEY) updateCartCount();
+});
+
+window.addEventListener('pageshow', updateCartCount);
+window.addEventListener('uttam-cart-updated', updateCartCount);
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+renderProducts();
+updateCartCount();
+initFirebaseAccount();
+</script>
+</body>
+</html>
